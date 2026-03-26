@@ -1,0 +1,21 @@
+//400. Nth Digit
+class Solution {
+    public int findNthDigit(int n) {
+        int muls=10;
+        int mule=100;
+        int start=9;
+        if(n<10) return n;
+        int dig=2;
+        while(start==n){
+            if(start>mule){
+                mule=mule*10;
+                muls*=10;
+                dig++;
+            }
+            start+=dig;
+            if(start+dig>n){
+                while()
+            }
+        }
+    }
+}
