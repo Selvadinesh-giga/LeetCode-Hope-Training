@@ -1,0 +1,111 @@
+public int findMaxLength(int[] nums) {
+    int maxLen = 0;
+
+    for (int i = 0; i < nums.length; i++) {
+        int sum = 0;
+
+        for (int j = i; j < nums.length; j++) {
+            if (nums[j] == 0) {
+                sum += -1;
+            } else {
+                sum += 1;
+            }
+            if (sum == 0) {
+                int len = j - i + 1;
+                maxLen = Math.max(maxLen, len);
+            }
+        }
+    }
+
+    return maxLen;
+}
+//rapido app
+import java.util.*;
+
+class Ride {
+    String name;
+    String pickup;
+    String drop;
+    List<String> stop;
+    double fare;
+    String status;
+
+    Ride(String name, String pickup, String drop) {
+        this.name = name;
+        this.pickup = pickup;
+        this.drop = drop;
+        this.stop = new ArrayList<>();
+        this.fare = calculation();
+        this.status = "BOOKED";
+    }
+
+    Ride(String name, String pickup, String drop, List<String> stop) {
+        this.name = name;
+        this.pickup = pickup;
+        this.drop = drop;
+        this.stop = stop;
+        this.fare = calculation();
+        this.status = "BOOKED";
+    }
+
+    double calculation() {
+        return 50 + (stop.size() * 50);
+    }
+
+    void showDetails() {
+        System.out.println("\nCustomer: " + name);
+        System.out.print("Route: " + pickup);
+        for (String s : stop) {
+            System.out.print(" -> " + s);
+        }
+        System.out.println(" -> " + drop);
+        System.out.println("Fare: " + fare);
+        System.out.println("Status: " + status);
+    }
+
+    void cancelRide() {
+        if (status.equals("CANCELLED")) {
+            System.out.println("Already cancelled");
+        } 
+        else if (status.equals("COMPLETED")) {
+            System.out.println("Ride already completed, cannot cancel");
+        } 
+        else {
+            status = "CANCELLED";
+            fare = 0;
+            System.out.println("Ride cancelled");
+        }
+    }
+
+    void completeRide() {
+        if (status.equals("CANCELLED")) {
+            System.out.println("Ride was cancelled");
+        } 
+        else if (status.equals("COMPLETED")) {
+            System.out.println("Already completed");
+        } 
+        else {
+            status = "COMPLETED";
+            System.out.println("Ride completed. Fare = " + fare);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        List<String> stops = new ArrayList<>();
+        stops.add("Stop1");
+        stops.add("Stop2");
+
+        Ride r = new Ride("John", "Area A", "Area C", stops);
+
+        r.showDetails();
+
+        r.cancelRide();
+        r.showDetails();
+
+        r.completeRide();
+        r.showDetails();
+    }
+}
