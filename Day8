@@ -1,0 +1,114 @@
+count and say-leetcode
+
+lass Solution {
+    public String countAndSay(int n) {
+        
+        StringBuilder res=new StringBuilder("1");
+        for(int i=2;i<=n;i++){
+            StringBuilder str=new StringBuilder();
+            int count=1;
+            for(int j=1;j<res.length();j++){
+                if(res.charAt(j)==res.charAt(j-1)){
+                    count++;
+                }else{
+                    str.append(count).append(res.charAt(j-1));
+                    count=1;
+                }
+            }
+            str.append(count).append(res.charAt(res.length()-1));
+            res=str;
+
+        }
+        return res.toString();
+    }
+}
+Second high frequency letter
+
+class Solution{
+    public char secondMostOccuring(String s) {
+        int max=Integer.MIN_VALUE;
+        int second=Integer.MIN_VALUE;
+        char m=' ';
+        char sec=' '; 
+        for(int i=0; i<s.length(); i++){
+            boolean flag=false;
+            for(int j=0; j<i; j++){
+                if(s.charAt(i)==s.charAt(j)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(flag) continue;
+            int count=0;
+            for(int j=i; j<s.length(); j++){
+                if(s.charAt(i)==s.charAt(j)) count++;
+            }
+            if(count>max){
+                second=max;
+                max=count;
+                sec=m;
+                m=s.charAt(i);
+            }
+            else if(count>second && count!=max){
+                second=count;
+                sec=s.charAt(i);
+            }
+
+        }
+        return sec;
+    }
+}
+
+Shortest word in string
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int min = Integer.MAX_VALUE;
+        String value = "";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= s.length(); i++) {
+            if (i < s.length() && s.charAt(i) != ' ') {
+                sb.append(s.charAt(i)); 
+            } else {
+                if (sb.length() > 0 && sb.length() < min) {
+                    min = sb.length();
+                    value = sb.toString();
+                }
+                sb.setLength(0); 
+            }
+        }
+        System.out.print(value);
+    }
+}
+
+zigzag conversion
+
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows == 1) return s;
+        StringBuilder[] sb = new StringBuilder[numRows]; 
+        for(int i = 0; i < numRows; i++){
+            sb[i] = new StringBuilder();
+        }
+        boolean dir = false; 
+        int currrow = 0;  
+        for(int i = 0; i < s.length(); i++){
+            sb[currrow].append(s.charAt(i));
+            if(currrow == 0 || currrow == numRows - 1){
+                dir = !dir;
+            } 
+            if(dir){
+                currrow++; 
+            } else {
+                currrow--; 
+            }
+        } 
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < sb.length; i++){
+            res.append(sb[i]);
+        }
+        return res.toString();
+    }
+}
