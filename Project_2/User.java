@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 abstract class User {
     private int id;
     private String name;
@@ -12,4 +13,20 @@ abstract class User {
     }
 
     public abstract void displayRole();
+=======
+abstract class User {
+    private int id;
+    private String name;
+
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public abstract void displayRole();
+>>>>>>> dbd05ca (Till Day12)
 }
